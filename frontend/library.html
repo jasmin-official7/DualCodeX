@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>ArtisanFlow - Library</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  
+  <!-- Be Vietnam Pro & Hanken Grotesk Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <script src="config.js"></script>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed-variant": "#891e00",
+            "secondary-fixed-dim": "#b7cbc0",
+            "tertiary-container": "#008098",
+            "secondary": "#506359",
+            "on-surface": "#251915",
+            "inverse-surface": "#3c2d29",
+            "on-tertiary-container": "#f9fdff",
+            "on-error": "#ffffff",
+            "primary": "#a83212",
+            "surface-container-high": "#fbe3dd",
+            "on-tertiary-fixed": "#001f27",
+            "surface-variant": "#f6ddd7",
+            "border-muted": "#E5E1DA",
+            "inverse-primary": "#ffb4a1",
+            "surface-container": "#ffe9e4",
+            "secondary-container": "#d0e5d8",
+            "on-secondary-container": "#54675d",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#fffbff",
+            "surface": "#fff8f6",
+            "tertiary-fixed": "#b1ecff",
+            "surface-tint": "#ab3514",
+            "on-background": "#251915",
+            "background-dark": "#1E1B18",
+            "text-primary": "#2A2622",
+            "primary-fixed-dim": "#ffb4a1",
+            "background": "#fff8f6",
+            "surface-container-low": "#fff1ed",
+            "outline": "#8c716a",
+            "surface-dim": "#edd5cf",
+            "accent-amber": "#D97A2E",
+            "on-tertiary-fixed-variant": "#004e5e",
+            "on-secondary-fixed-variant": "#384b42",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#65d5f3",
+            "surface-container-highest": "#f6ddd7",
+            "surface-bright": "#fff8f6",
+            "text-secondary": "#7A7268",
+            "tertiary": "#006579",
+            "on-primary-fixed": "#3c0800",
+            "primary-fixed": "#ffdbd2",
+            "inverse-on-surface": "#ffede9",
+            "error-container": "#ffdad6",
+            "primary-container": "#ca4a28",
+            "on-secondary-fixed": "#0d1f18",
+            "secondary-fixed": "#d3e7db",
+            "on-tertiary": "#ffffff",
+            "background-base": "#FAF7F2",
+            "outline-variant": "#e0bfb7",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#59413b",
+            "on-primary": "#ffffff",
+            "identity-green": "#1b6d3a",
+            "identity-yellow": "#7a5c00"
+          },
+          fontFamily: {
+            sans: ['Be Vietnam Pro', 'Hanken Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #fff8f6;
+      color: #251915;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .blueprint-bg {
+      background-image: radial-gradient(rgba(168, 50, 18, 0.05) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+    .panel-card {
+      background: #fff1ed;
+      border: 1px solid rgba(168, 50, 18, 0.12);
+      border-radius: 12px;
+      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .panel-card:hover {
+      background: #fbe3dd;
+      border-color: rgba(168, 50, 18, 0.3);
+      box-shadow: 0 12px 30px -10px rgba(168, 50, 18, 0.12);
+      transform: translateY(-2px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(168, 50, 18, 0.2);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body class="h-full flex flex-col font-sans blueprint-bg min-h-screen">
+
+  <!-- Main Header -->
+  <header class="h-16 flex items-center justify-between px-6 md:px-10 z-50 border-b border-outline-variant/20 fixed top-0 w-full bg-surface-bright/90 backdrop-blur-md">
+    <div class="flex items-center gap-8">
+      <a href="workspace.html" class="flex items-center gap-2 group">
+        <span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">palette</span>
+        <span class="text-xl md:text-2xl font-bold tracking-tight text-primary">ArtisanFlow</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors py-1" href="workspace.html">Workspace</a>
+        <a class="text-sm font-bold text-primary border-b-2 border-primary py-1" href="library.html">Library</a>
+      </nav>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="flex items-center gap-4">
+      <span class="hidden sm:inline text-xs font-semibold text-text-secondary bg-surface-container-high px-3 py-1 rounded-full">
+        AI Captions & Memes
+      </span>
+      
+      <div class="relative group">
+        <button id="userMenuBtn" class="flex items-center gap-2 p-1.5 rounded-full hover:bg-surface-container-high transition-colors">
+          <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shadow-md">
+            DA
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+        </button>
+
+        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-outline-variant/20 py-2 z-50">
+          <div class="px-4 py-2 border-b border-outline-variant/10">
+            <p class="text-xs font-bold text-on-surface">Elena Vance</p>
+            <p class="text-[11px] text-text-secondary">artisan@studio.com</p>
+          </div>
+          <a href="index.html" class="flex items-center gap-2 px-4 py-2 text-xs text-on-surface hover:bg-surface-container-low transition-colors">
+            Profile
+          </a>
+          <a href="signin.html" class="flex items-center gap-2 px-4 py-2 text-xs text-error hover:bg-error-container/20 transition-colors">
+            <span class="material-symbols-outlined text-sm">logout</span> Sign Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar Navigation (Desktop) -->
+  <aside class="hidden md:flex flex-col h-[calc(100vh-64px)] fixed left-0 top-16 w-64 py-8 px-6 bg-surface-container-low border-r border-outline-variant/20 shadow-md z-40">
+    <nav class="space-y-2">
+      <a href="workspace.html" class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg font-bold flex items-center justify-center gap-2 mb-4 hover:bg-primary-container transition-all active:scale-95 shadow-md">
+        <span class="material-symbols-outlined text-xl">add</span>
+        <span>New Project</span>
+      </a>
+
+      <a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all" href="workspace.html">
+        <span class="material-symbols-outlined text-xl">palette</span>
+        <span class="text-sm font-medium">Workspace</span>
+      </a>
+
+      <a class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-high text-primary font-bold transition-all shadow-sm" href="library.html">
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">auto_awesome_motion</span>
+        <span class="text-sm font-bold">Library</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Library Content -->
+  <main class="flex-1 relative flex flex-col pt-20 pb-24 md:pl-64 min-h-screen">
+    
+    <div class="px-6 md:px-12 py-8 max-w-7xl mx-auto w-full space-y-8">
+      
+      <!-- Library Header & Filters -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-outline-variant/20 pb-6">
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight text-on-surface">Generated Work</h1>
+          <p class="text-sm text-on-surface-variant/80 mt-1">Explore the generated AI-powered captions and memes for social media.</p>
+        </div>
+
+        <!-- Filter and Search controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="relative">
+            <input id="searchInput" type="text" placeholder="Search history..." class="bg-white border border-outline-variant rounded-lg pl-9 pr-4 py-2 text-xs text-on-surface placeholder:text-outline focus:border-primary outline-none transition-all w-40 sm:w-56">
+            <span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+          </div>
+
+          <button id="filterAll" onclick="setCategoryFilter('all')" class="filter-chip px-3 py-2 bg-primary text-white rounded-lg text-xs font-bold shadow-sm transition-all">
+            All
+          </button>
+          <button id="filterCaptions" onclick="setCategoryFilter('caption')" class="filter-chip px-3 py-2 bg-white border border-outline-variant text-text-secondary hover:bg-surface-container-low rounded-lg text-xs font-semibold transition-all">
+            Captions
+          </button>
+          <button id="filterMemes" onclick="setCategoryFilter('meme')" class="filter-chip px-3 py-2 bg-white border border-outline-variant text-text-secondary hover:bg-surface-container-low rounded-lg text-xs font-semibold transition-all">
+            Memes
+          </button>
+        </div>
+      </div>
+
+      <!-- Panels Grid Container -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="panelGrid">
+        <!-- Rendered dynamically by JavaScript from JS artwork array -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Artwork Lightbox / Modal View -->
+  <div id="panelModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-xl shadow-2xl border border-outline-variant/20 max-w-2xl w-full overflow-hidden flex flex-col max-h-[90vh]">
+      <!-- Modal Header -->
+      <div class="p-4 bg-surface-container-low border-b border-outline-variant/20 flex justify-between items-center">
+        <div>
+          <h3 id="modalTitle" class="font-bold text-on-surface text-base">Artwork Detail</h3>
+          <span id="modalCategoryBadge" class="text-[11px] font-bold text-primary uppercase tracking-wider">Category</span>
+        </div>
+        <button onclick="closeModal()" class="p-1 hover:bg-surface-container-high rounded-full transition-colors text-text-secondary">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 space-y-4 overflow-y-auto custom-scrollbar">
+        <div class="aspect-video w-full rounded-lg overflow-hidden border border-outline-variant bg-surface-container-low shadow-sm">
+          <img id="modalImg" src="" alt="Artwork View" class="w-full h-full object-cover">
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pt-1">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-text-secondary">Artwork Description</h4>
+            <!-- Generate AI Description Button -->
+            <button id="aiGenerateBtn" onclick="generateAiDescription()" class="px-3.5 py-1.5 bg-gradient-to-r from-amber-600 to-primary hover:from-amber-700 hover:to-primary-container text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-md active:scale-95 disabled:opacity-50">
+              <span class="material-symbols-outlined text-sm">auto_awesome</span>
+              <span id="aiBtnText">Generate AI Description</span>
+            </button>
+          </div>
+
+          <p id="modalPrompt" class="text-sm text-on-surface leading-relaxed bg-surface p-4 rounded-lg border border-outline-variant/20 font-sans"></p>
+          
+          <!-- Error / Status Message Container -->
+          <div id="aiStatusMsg" class="hidden text-xs px-3.5 py-2.5 rounded-lg font-medium border"></div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-outline-variant/20 bg-background-base flex justify-end gap-3">
+        <button onclick="closeModal()" class="px-5 py-2 border border-outline-variant text-text-secondary rounded-lg text-xs font-bold hover:bg-surface-container-low transition-all">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-text-primary text-white px-5 py-3 rounded-lg shadow-xl text-xs font-semibold transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4 z-50 flex items-center gap-2">
+    <span class="material-symbols-outlined text-sm text-secondary-fixed">check_circle</span>
+    <span id="toastMessage">Notification message</span>
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script>
+    const STORAGE_KEY = 'artisanflow_history';
+
+    // Get History Data from localStorage
+    function getHistoryData() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) { console.error(e); }
+      }
+      const initial = [
+        {
+          id: 1,
+          type: 'caption',
+          text: 'When the coffee kicks in right as your weekend begins ✨ #ArtisanFlow',
+          context: 'Friday studio mood',
+          image: 'assets/artisan_studio_workspace.png',
+          timestamp: 'Just now'
+        },
+        {
+          id: 2,
+          type: 'meme',
+          text: 'Me spending 5 seconds writing code vs 3 hours choosing the font and color theme.',
+          context: 'Developer life',
+          image: 'assets/workspace_banner.png',
+          timestamp: '1 hour ago'
+        },
+        {
+          id: 3,
+          type: 'caption',
+          text: 'Chasing pure creative inspiration in the digital studio. 🎨',
+          context: 'Digital art studio',
+          image: 'assets/artisan_studio_workspace.png',
+          timestamp: 'Yesterday'
+        }
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
+      return initial;
+    }
+
+    let currentItem = null;
+    let currentFilter = 'all';
+
+    // Render cards into panelGrid
+    function renderLibrary(filterCategory = 'all', searchKeyword = '') {
+      const panelGrid = document.getElementById('panelGrid');
+      if (!panelGrid) return;
+
+      const history = getHistoryData();
+
+      const filtered = history.filter(item => {
+        const matchesCategory = filterCategory === 'all' || (item.type && item.type.toLowerCase() === filterCategory.toLowerCase());
+        const matchesSearch = !searchKeyword || 
+          (item.text && item.text.toLowerCase().includes(searchKeyword.toLowerCase())) || 
+          (item.context && item.context.toLowerCase().includes(searchKeyword.toLowerCase()));
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        panelGrid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-text-secondary">
+            <span class="material-symbols-outlined text-4xl mb-2">find_in_page</span>
+            <p class="text-sm font-semibold">No generated captions or memes found matching your criteria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      panelGrid.innerHTML = filtered.map(item => `
+        <article class="panel-card p-5 flex flex-col justify-between gap-4 group cursor-pointer relative" onclick="openModal(${item.id})">
+          
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 ${item.type === 'meme' ? 'bg-amber-100 text-amber-800' : 'bg-secondary-container text-on-secondary-container'} text-[11px] font-bold rounded-full uppercase tracking-wider">
+              ${item.type || 'caption'}
+            </span>
+            <span class="text-[11px] text-text-secondary font-medium">${item.timestamp || 'Recent'}</span>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-sm text-on-surface font-medium leading-relaxed italic">
+              "${escapeHtml(item.text)}"
+            </p>
+            ${item.context ? `<p class="text-[11px] text-text-secondary italic">Context: ${escapeHtml(item.context)}</p>` : ''}
+          </div>
+
+          <div class="flex items-center justify-between pt-3 border-t border-outline-variant/20 mt-2 gap-2 relative">
+            <div class="flex items-center gap-2">
+              <button onclick="event.stopPropagation(); copyText('${escapeHtml(item.text)}')" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary-container transition-all flex items-center gap-1 shadow-sm">
+                <span class="material-symbols-outlined text-xs">content_copy</span> Copy Text
+              </button>
+              <button onclick="event.stopPropagation(); openModal(${item.id});" class="p-1.5 hover:bg-surface-container-high rounded text-text-secondary hover:text-on-surface transition-colors flex items-center gap-1 text-xs font-bold">
+                <span class="material-symbols-outlined text-sm">visibility</span> View Details
+              </button>
+            </div>
+
+            <!-- Lightweight Delete Action with Inline Confirmation -->
+            <div class="relative">
+              <button onclick="event.stopPropagation(); toggleDeleteConfirm(${item.id})" title="Delete item" class="p-1.5 text-text-secondary hover:text-error hover:bg-error-container/40 rounded-lg transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-base">delete</span>
+              </button>
+
+              <!-- Inline Confirmation Popover -->
+              <div id="delete-confirm-${item.id}" class="hidden absolute right-0 bottom-full mb-2 bg-white border border-outline-variant/40 shadow-xl rounded-lg p-2.5 z-20 flex items-center gap-2.5 whitespace-nowrap">
+                <span class="text-xs font-bold text-error">Delete this?</span>
+                <button onclick="event.stopPropagation(); deleteHistoryItem(${item.id})" class="px-2.5 py-1 bg-error text-white text-[11px] font-bold rounded hover:bg-red-700 transition-colors">Delete</button>
+                <button onclick="event.stopPropagation(); toggleDeleteConfirm(${item.id})" class="px-2.5 py-1 bg-surface-container-high text-on-surface text-[11px] font-bold rounded hover:bg-surface-variant transition-colors">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+        </article>
+      `).join('');
+    }
+
+    function toggleDeleteConfirm(id) {
+      document.querySelectorAll('[id^="delete-confirm-"]').forEach(el => {
+        if (el.id !== `delete-confirm-${id}`) el.classList.add('hidden');
+      });
+
+      const confirmEl = document.getElementById(`delete-confirm-${id}`);
+      if (confirmEl) {
+        confirmEl.classList.toggle('hidden');
+      }
+    }
+
+    function deleteHistoryItem(id) {
+      let history = getHistoryData();
+      history = history.filter(item => item.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+
+      const searchKeyword = document.getElementById('searchInput') ? document.getElementById('searchInput').value : '';
+      renderLibrary(currentFilter, searchKeyword);
+      showToast('Item deleted successfully!');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Text copied to clipboard!');
+      }).catch(() => {
+        showToast('Copied to clipboard');
+      });
+    }
+
+    // Filter Chips logic
+    function setCategoryFilter(category) {
+      currentFilter = category;
+      const searchKeyword = document.getElementById('searchInput').value;
+
+      const btnAll = document.getElementById('filterAll');
+      const btnCaptions = document.getElementById('filterCaptions');
+      const btnMemes = document.getElementById('filterMemes');
+
+      const activeClass = 'filter-chip px-3 py-2 bg-primary text-white rounded-lg text-xs font-bold shadow-sm transition-all';
+      const inactiveClass = 'filter-chip px-3 py-2 bg-white border border-outline-variant text-text-secondary hover:bg-surface-container-low rounded-lg text-xs font-semibold transition-all';
+
+      if (btnAll) btnAll.className = category === 'all' ? activeClass : inactiveClass;
+      if (btnCaptions) btnCaptions.className = category === 'caption' ? activeClass : inactiveClass;
+      if (btnMemes) btnMemes.className = category === 'meme' ? activeClass : inactiveClass;
+
+      renderLibrary(currentFilter, searchKeyword);
+    }
+
+    // Modal Inspection Logic
+    const panelModal = document.getElementById('panelModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategoryBadge = document.getElementById('modalCategoryBadge');
+    const modalPrompt = document.getElementById('modalPrompt');
+    const modalImg = document.getElementById('modalImg');
+    const aiStatusMsg = document.getElementById('aiStatusMsg');
+
+    function openModal(id) {
+      const history = getHistoryData();
+      const item = history.find(a => a.id === id);
+      if (!item) return;
+      currentItem = item;
+
+      modalTitle.innerText = `${(item.type || 'Output').toUpperCase()} Detail`;
+      modalCategoryBadge.innerText = `TYPE: ${(item.type || 'caption').toUpperCase()}`;
+      modalPrompt.innerText = item.text;
+      modalImg.src = item.image || 'assets/artisan_studio_workspace.png';
+
+      if (aiStatusMsg) {
+        aiStatusMsg.classList.add('hidden');
+        aiStatusMsg.innerText = '';
+      }
+
+      panelModal.classList.remove('opacity-0', 'pointer-events-none');
+      panelModal.classList.add('opacity-100');
+    }
+
+    function closeModal() {
+      panelModal.classList.remove('opacity-100');
+      panelModal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // Call POST /api/describe to generate AI description for item
+    async function generateAiDescription() {
+      if (!currentItem) return;
+
+      const aiBtn = document.getElementById('aiGenerateBtn');
+      const aiBtnText = document.getElementById('aiBtnText');
+      const aiStatusMsg = document.getElementById('aiStatusMsg');
+      const modalPrompt = document.getElementById('modalPrompt');
+
+      aiBtn.disabled = true;
+      aiBtnText.innerText = 'Generating...';
+      if (aiStatusMsg) aiStatusMsg.classList.add('hidden');
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/describe`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: currentItem.text,
+            category: currentItem.type || 'caption'
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || `Server returned HTTP ${response.status}`);
+        }
+
+        if (data.description) {
+          modalPrompt.innerText = `${currentItem.text}\n\nAI Description:\n${data.description}`;
+          showToast('AI Description generated successfully!');
+        } else {
+          throw new Error('No description returned from Gemini server.');
+        }
+      } catch (error) {
+        console.error('Error generating AI description:', error);
+        if (aiStatusMsg) {
+          aiStatusMsg.innerText = `Failed to generate description: ${error.message || 'Unable to connect to backend at ' + API_BASE_URL}`;
+          aiStatusMsg.className = 'text-xs px-3.5 py-2.5 rounded-lg font-medium bg-red-100 text-red-700 border border-red-200 mt-2 block';
+          aiStatusMsg.classList.remove('hidden');
+        }
+        showToast('Failed to generate AI description.');
+      } finally {
+        aiBtn.disabled = false;
+        aiBtnText.innerText = 'Generate AI Description';
+      }
+    }
+
+    // Search Input Listener
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      renderLibrary(currentFilter, e.target.value);
+    });
+
+    // Dropdown User Menu
+    const userMenuBtn = document.getElementById('userMenuBtn');
+    const userDropdown = document.getElementById('userDropdown');
+    if (userMenuBtn && userDropdown) {
+      userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        userDropdown.classList.add('hidden');
+      });
+    }
+
+    // Toast Notification Helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      if (!toast || !toastMessage) return;
+      toastMessage.innerText = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 3500);
+    }
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLibrary();
+    });
+  </script>
+</body>
+</html>

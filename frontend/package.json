@@ -1,0 +1,13 @@
+{
+  "name": "dualcodex-frontend",
+  "version": "1.0.0",
+  "description": "Frontend static server and UI application for DualCodeX",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

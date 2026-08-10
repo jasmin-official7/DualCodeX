@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>ArtisanFlow - Creative Workspace</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet">
+  <!-- Icons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet">
+
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <script src="config.js"></script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      font-family: 'Hanken Grotesk', sans-serif;
+      color: #251915;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Custom Range Slider Styling */
+    input[type='range'] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: #E5E1DA;
+      border-radius: 8px;
+      border: none;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      height: 24px;
+      width: 24px;
+      border-radius: 8px;
+      background: #a83212;
+      /* Primary */
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -8px;
+      box-shadow: 0 4px 10px rgba(168, 50, 18, 0.25);
+      border: 2px solid #FAF7F2;
+      transition: transform 0.15s ease;
+    }
+
+    input[type='range']::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Loading Shimmer Effect */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .shimmer-bg {
+      background: linear-gradient(90deg, #f6ddd7 25%, #fbe3dd 50%, #f6ddd7 75%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite linear;
+    }
+
+    /* Tactile Accents */
+    .tactile-card {
+      box-shadow: 0 10px 40px -15px rgba(37, 25, 21, 0.08);
+      border: 1px solid rgba(140, 113, 106, 0.15);
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "background-base": "#FAF7F2",
+            "on-surface": "#251915",
+            "on-primary-container": "#fffbff",
+            "primary-container": "#ca4a28",
+            "error": "#ba1a1a",
+            "surface-container-high": "#fbe3dd",
+            "tertiary-container": "#008098",
+            "on-surface-variant": "#59413b",
+            "background": "#fff8f6",
+            "on-primary-fixed": "#3c0800",
+            "on-primary-fixed-variant": "#891e00",
+            "on-tertiary-fixed": "#001f27",
+            "tertiary": "#006579",
+            "inverse-primary": "#ffb4a1",
+            "outline": "#8c716a",
+            "secondary": "#506359",
+            "on-primary": "#ffffff",
+            "text-primary": "#2A2622",
+            "surface-dim": "#edd5cf",
+            "text-secondary": "#7A7268",
+            "on-secondary": "#ffffff",
+            "on-background": "#251915",
+            "surface-tint": "#ab3514",
+            "surface": "#fff8f6",
+            "secondary-container": "#d0e5d8",
+            "surface-variant": "#f6ddd7",
+            "background-dark": "#1E1B18",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "inverse-on-surface": "#ffede9",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#f9fdff",
+            "outline-variant": "#e0bfb7",
+            "primary": "#a83212",
+            "on-secondary-container": "#54675d",
+            "on-tertiary-fixed-variant": "#004e5e",
+            "surface-bright": "#fff8f6",
+            "secondary-fixed-dim": "#b7cbc0",
+            "secondary-fixed": "#d3e7db",
+            "on-secondary-fixed-variant": "#384b42",
+            "surface-container-low": "#fff1ed",
+            "tertiary-fixed": "#b1ecff",
+            "primary-fixed-dim": "#ffb4a1",
+            "border-muted": "#E5E1DA",
+            "tertiary-fixed-dim": "#65d5f3",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#3c2d29",
+            "on-secondary-fixed": "#0d1f18",
+            "surface-container-highest": "#f6ddd7",
+            "primary-fixed": "#ffdbd2",
+            "on-error-container": "#93000a",
+            "accent-amber": "#D97A2E",
+            "surface-container": "#ffe9e4"
+          },
+          "borderRadius": {
+            "DEFAULT": "8px",
+            "lg": "8px",
+            "xl": "8px",
+            "full": "9999px"
+          },
+          "spacing": {
+            "section-padding": "64px",
+            "stack-gap": "32px",
+            "margin-desktop": "48px",
+            "margin-mobile": "20px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "title-md": ["Be Vietnam Pro", "sans-serif"],
+            "headline-lg-mobile": ["Be Vietnam Pro", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "display-lg": ["Be Vietnam Pro", "sans-serif"],
+            "label-md": ["Hanken Grotesk", "sans-serif"],
+            "caption-sm": ["Hanken Grotesk", "sans-serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"],
+            "headline-lg": ["Be Vietnam Pro", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "caption-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-background-base text-on-surface font-body-md selection:bg-surface-variant">
+
+  <!-- Top Navigation Bar -->
+  <header
+    class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-background-base/90 backdrop-blur-md dark:bg-background-dark border-b border-outline-variant/20 shadow-sm">
+    <div class="flex items-center gap-4">
+      <a href="workspace.html" class="flex items-center gap-2 group">
+        <span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform"
+          style="font-variation-settings: 'FILL' 1;">palette</span>
+        <span
+          class="font-display-lg text-headline-lg-mobile text-primary dark:text-primary-fixed-dim font-bold tracking-tight">ArtisanFlow</span>
+      </a>
+      <nav class="hidden md:flex gap-8 ml-8">
+        <a class="font-title-md text-sm text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary py-1"
+          href="workspace.html">Workspace</a>
+        <a class="font-title-md text-sm text-on-surface-variant hover:text-primary font-medium transition-colors py-1"
+          href="library.html">Library</a>
+      </nav>
+    </div>
+
+    <!-- User Account Menu -->
+    <div class="relative flex items-center gap-3">
+      <span
+        class="hidden sm:inline font-label-md text-xs text-text-secondary bg-surface-container-high px-3 py-1 rounded-full">Artisan
+        Pro</span>
+
+      <div class="relative group">
+        <button id="userMenuBtn"
+          class="flex items-center gap-2 p-1.5 rounded-full hover:bg-surface-container-high transition-colors">
+          <div
+            class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shadow-md">
+            DA
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div id="userDropdown"
+          class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-outline-variant/20 py-2 z-50">
+          <div class="px-4 py-2 border-b border-outline-variant/10">
+            <p class="font-label-md text-xs font-bold text-on-surface">Elena Vance</p>
+            <p class="font-caption-sm text-[11px] text-text-secondary">artisan@studio.com</p>
+          </div>
+          <a href="index.html"
+            class="flex items-center gap-2 px-4 py-2 text-xs font-label-md text-on-surface hover:bg-surface-container-low transition-colors">
+            <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-sm flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+              </svg>
+            </div>
+            Profile
+          </a>
+          <a href="signin.html"
+            class="flex items-center gap-2 px-4 py-2 text-xs font-label-md text-error hover:bg-error-container/20 transition-colors">
+            <span class="material-symbols-outlined text-sm">logout</span> Sign Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Side Navigation (Desktop Only) -->
+  <aside
+    class="hidden md:flex flex-col h-[calc(100vh-64px)] fixed left-0 top-16 w-64 py-8 px-6 bg-surface-container-low dark:bg-background-dark border-r border-outline-variant/20 shadow-md">
+    <nav class="space-y-2">
+      <button id="newProjectBtn"
+        class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg font-label-md flex items-center justify-center gap-2 mb-4 hover:bg-primary-container transition-all active:scale-95 shadow-md">
+        <span class="material-symbols-outlined text-xl">add</span>
+        <span>New Project</span>
+      </button>
+
+      <a class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-high text-primary font-bold transition-all shadow-sm"
+        href="workspace.html">
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">palette</span>
+        <span class="font-label-md text-sm">Workspace</span>
+      </a>
+
+      <a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all"
+        href="library.html">
+        <span class="material-symbols-outlined text-xl">auto_awesome_motion</span>
+        <span class="font-label-md text-sm">Library</span>
+      </a>
+
+      <!-- Studio Usage Widget 
+      <div class="mt-auto p-4 bg-white/70 backdrop-blur-sm rounded-lg border border-outline-variant/20 space-y-2">
+        <div class="flex justify-between items-center text-xs font-label-md">
+          <span class="text-text-secondary">Monthly Credits</span>
+          <span class="font-bold text-primary">420 / 500</span>
+        </div>
+        <div class="w-full h-1.5 bg-border-muted rounded-full overflow-hidden">
+          <div class="h-full bg-primary w-[84%] rounded-full"></div>
+        </div>
+        <p class="text-[11px] text-text-secondary italic">Pro plan renews Aug 15</p>
+      </div>-->
+  </aside>
+
+  <!-- Main Unified Dashboard Content -->
+  <main class="pt-24 pb-20 px-margin-mobile md:pl-[calc(16rem+48px)] md:pr-margin-desktop min-h-screen">
+    <div class="max-w-5xl mx-auto space-y-10">
+
+      <!-- Header Section -->
+      <header class="space-y-2">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full text-xs font-label-md text-primary">
+          <span class="material-symbols-outlined text-sm">auto_awesome</span>
+          <span>AI Caption & Meme Engine Active</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Creative Workspace</h1>
+        <p class="font-body-lg text-body-lg text-text-secondary max-w-2xl">
+          Upload any image, and watch as AI turns it into the perfect caption or meme — ready to post.
+        </p>
+      </header>
+
+      <!-- Reference Studio Upload Zone -->
+      <section class="space-y-6">
+        <div class="bg-surface-container-lowest rounded-lg p-8 tactile-card border border-outline-variant/20">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-xl">folder_open</span>
+              <h2 class="font-title-md text-title-md text-on-surface font-semibold">Reference Studio</h2>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="font-label-md text-xs text-text-secondary" id="file-count">0 references added</span>
+              <button id="clearRefsBtn" class="text-xs text-error font-bold hover:underline hidden">Clear All</button>
+            </div>
+          </div>
+
+          <!-- Drop Zone Area -->
+          <div
+            class="relative group cursor-pointer border-2 border-dashed border-secondary/30 bg-background-base rounded-lg transition-all duration-300 hover:border-primary hover:bg-surface-container-low p-8 flex flex-col items-center justify-center min-h-[220px]"
+            id="drop-zone">
+            <input accept="image/*" class="hidden" id="file-input" type="file">
+
+            <div class="text-center space-y-4" id="empty-state">
+              <div
+                class="w-16 h-16 bg-surface-container-high rounded-xl mx-auto flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-3xl text-primary"
+                  style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+              </div>
+              <div class="space-y-1">
+                <h3 class="font-title-md text-label-md text-on-surface font-bold">Drop your image here</h3>
+                <p class="font-body-md text-caption-sm text-text-secondary">Drag & drop JPG/PNG files or click to browse</p>
+              </div>
+              <button type="button"
+                class="px-6 py-2.5 bg-secondary hover:bg-secondary/90 text-on-secondary rounded-lg font-label-md text-sm hover:shadow-md transition-all active:scale-95">
+                Select Image
+              </button>
+            </div>
+
+            <!-- Preview Grid for uploaded files -->
+            <div id="preview-grid" class="hidden w-full grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 pt-2">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Generation Workspace Controls -->
+      <section class="bg-surface-container-lowest rounded-lg p-8 tactile-card border border-outline-variant/20 space-y-6">
+
+        <!-- Mode Buttons -->
+        <div>
+          <label class="font-label-md text-xs font-bold text-on-surface-variant uppercase tracking-wider block mb-3">Select Generation Mode</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button type="button" id="modeCaptionBtn"
+              class="mode-btn py-3 px-5 rounded-lg font-title-md text-sm font-bold transition-all shadow-sm bg-primary text-on-primary border-2 border-primary flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-lg">chat_bubble</span>
+              <span>Generate Caption</span>
+            </button>
+            <button type="button" id="modeMemeBtn"
+              class="mode-btn py-3 px-5 rounded-lg font-title-md text-sm font-bold transition-all border-2 border-outline-variant text-text-secondary hover:bg-surface-container-low flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-lg">sentiment_very_satisfied</span>
+              <span>Make a Meme</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Prompt Area -->
+        <div class="relative group space-y-2">
+          <div class="flex justify-between items-center px-1">
+            <label for="promptInput"
+              class="font-label-md text-xs font-bold text-on-surface-variant uppercase tracking-wider">Context Prompt (Optional)</label>
+            <button id="clearPromptBtn" class="text-xs text-outline hover:text-primary transition-colors">Clear Prompt</button>
+          </div>
+          <textarea id="promptInput" maxlength="150" rows="3"
+            class="w-full p-4 rounded-lg bg-white border-2 border-outline-variant/30 focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md font-body-md transition-all placeholder:text-outline/60 resize-none shadow-sm outline-none"
+            placeholder="Add a bit of context for a funnier/more relevant result... e.g. 'my dog judging my life choices'"></textarea>
+
+          <div class="flex justify-between items-center px-1 text-caption-sm text-outline">
+            <span id="charCount">0 / 150 characters</span>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="pt-2">
+          <button
+            class="w-full bg-primary text-on-primary py-4 rounded-lg font-title-md text-title-md font-bold flex items-center justify-center gap-3 hover:bg-primary-container transition-all shadow-lg active:scale-95 group overflow-hidden"
+            id="generate-btn" type="button">
+            <span id="genBtnLabel">Generate Output</span>
+            <span class="material-symbols-outlined group-hover:rotate-12 transition-transform">auto_awesome</span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Result Area -->
+      <section class="space-y-6 pt-4" id="result-area">
+        <div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+          <div class="flex items-center gap-3">
+            <h2 class="font-headline-lg text-title-md text-on-surface font-bold">Generated Output</h2>
+            <span id="outputTypeBadge"
+              class="px-2.5 py-0.5 bg-secondary-container text-on-secondary-container font-label-md text-[11px] rounded-full font-bold uppercase tracking-wider">Caption</span>
+          </div>
+          <div class="flex gap-2">
+            <button id="copyOutputBtn" title="Click to Copy" type="button"
+              class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-xs font-bold flex items-center gap-2 shadow-sm hover:bg-primary-container transition-all active:scale-95">
+              <span class="material-symbols-outlined text-sm">content_copy</span>
+              <span id="copyBtnText">Click to Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="relative rounded-xl p-8 tactile-card bg-white shadow-md border border-outline-variant/20 min-h-[160px] flex flex-col justify-center">
+
+          <!-- Loading Overlay -->
+          <div
+            class="absolute inset-0 shimmer-bg flex flex-col items-center justify-center gap-3 z-20 transition-opacity duration-500 opacity-0 pointer-events-none rounded-xl"
+            id="loading-overlay">
+            <div class="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+            <p class="font-label-md text-primary font-bold animate-pulse uppercase tracking-widest text-xs" id="loadingText">Generating...</p>
+          </div>
+
+          <!-- Output Display Container -->
+          <div id="outputContainer" class="space-y-3">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary text-2xl mt-0.5">format_quote</span>
+              <p id="outputText" class="text-lg md:text-xl font-medium text-on-surface leading-relaxed italic">
+                Upload an image, select a mode, and click Generate Output to create social media captions or memes!
+              </p>
+            </div>
+            <div id="outputContextTag" class="text-xs text-text-secondary font-medium hidden">
+              Context: <span id="outputContextVal"></span>
+            </div>
+          </div>
+
+          <!-- Error Display Box -->
+          <div id="errorBox" class="hidden mt-4 p-4 bg-error-container text-on-error-container rounded-lg text-xs font-label-md flex items-center justify-between gap-3 border border-error/20">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-error">error</span>
+              <span id="errorMsg">Something went wrong. Please try again.</span>
+            </div>
+            <button type="button" onclick="document.getElementById('errorBox').classList.add('hidden')" class="hover:underline text-xs font-bold">Dismiss</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Recently Generated Captions/Memes (History) -->
+      <section class="space-y-6 pt-6" id="gallery-section">
+        <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+          <h3 class="font-title-md text-label-md text-on-surface-variant font-bold uppercase tracking-widest">Recently Generated Captions/Memes</h3>
+          <span class="text-caption-sm text-text-secondary" id="historyCountText">0 recent creations</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6" id="recentHistoryGrid">
+          <!-- Populated from localStorage by JavaScript -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav
+    class="md:hidden fixed bottom-0 left-0 w-full bg-background-base/95 backdrop-blur-md flex justify-around items-center py-3 px-6 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] border-t border-outline-variant/20 z-50">
+    <a href="workspace.html" class="flex flex-col items-center gap-1 text-primary">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+      <span class="text-[10px] font-bold">Studio</span>
+    </a>
+    <a href="#gallery-section" class="flex flex-col items-center gap-1 text-on-surface-variant">
+      <span class="material-symbols-outlined">auto_awesome_motion</span>
+      <span class="text-[10px]">Gallery</span>
+    </a>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div id="toast"
+    class="fixed bottom-6 right-6 bg-text-primary text-white px-5 py-3 rounded-lg shadow-xl text-xs font-label-md transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4 z-50 flex items-center gap-2">
+    <span class="material-symbols-outlined text-sm text-secondary-fixed">check_circle</span>
+    <span id="toastMessage">Action completed successfully</span>
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Mode Selection State
+    let selectedMode = 'caption'; // 'caption' or 'meme'
+    const modeCaptionBtn = document.getElementById('modeCaptionBtn');
+    const modeMemeBtn = document.getElementById('modeMemeBtn');
+    const outputTypeBadge = document.getElementById('outputTypeBadge');
+
+    modeCaptionBtn.addEventListener('click', () => {
+      selectedMode = 'caption';
+      modeCaptionBtn.className = 'mode-btn py-3 px-5 rounded-lg font-title-md text-sm font-bold transition-all shadow-sm bg-primary text-on-primary border-2 border-primary flex items-center justify-center gap-2';
+      modeMemeBtn.className = 'mode-btn py-3 px-5 rounded-lg font-title-md text-sm font-bold transition-all border-2 border-outline-variant text-text-secondary hover:bg-surface-container-low flex items-center justify-center gap-2';
+      outputTypeBadge.innerText = 'Caption';
+    });
+
+    modeMemeBtn.addEventListener('click', () => {
+      selectedMode = 'meme';
+      modeMemeBtn.className = 'mode-btn py-3 px-5 rounded-lg font-title-md text-sm font-bold transition-all shadow-sm bg-primary text-on-primary border-2 border-primary flex items-center justify-center gap-2';
+      modeCaptionBtn.className = 'mode-btn py-3 px-5 rounded-lg font-title-md text-sm font-bold transition-all border-2 border-outline-variant text-text-secondary hover:bg-surface-container-low flex items-center justify-center gap-2';
+      outputTypeBadge.innerText = 'Meme';
+    });
+
+    // User Dropdown Menu Toggle
+    const userMenuBtn = document.getElementById('userMenuBtn');
+    const userDropdown = document.getElementById('userDropdown');
+
+    if (userMenuBtn && userDropdown) {
+      userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', () => {
+        userDropdown.classList.add('hidden');
+      });
+    }
+
+    // File Upload & Preview
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const fileCount = document.getElementById('file-count');
+    const emptyState = document.getElementById('empty-state');
+    const previewGrid = document.getElementById('preview-grid');
+    const clearRefsBtn = document.getElementById('clearRefsBtn');
+
+    let selectedFiles = [];
+
+    dropZone.addEventListener('click', (e) => {
+      if (e.target !== clearRefsBtn && !clearRefsBtn.contains(e.target)) fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-primary', 'bg-surface-container-low');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('border-primary', 'bg-surface-container-low');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-primary', 'bg-surface-container-low');
+      if (e.dataTransfer.files.length) {
+        handleFiles(e.dataTransfer.files);
+      }
+    });
+
+    function handleFiles(files) {
+      if (!files || files.length === 0) return;
+      selectedFiles = [files[0]]; // Store current uploaded image
+      updateRefUI();
+    }
+
+    function updateRefUI() {
+      const count = selectedFiles.length;
+      fileCount.innerText = `${count} image${count !== 1 ? 's' : ''} added`;
+
+      if (count > 0) {
+        emptyState.classList.add('hidden');
+        previewGrid.classList.remove('hidden');
+        clearRefsBtn.classList.remove('hidden');
+
+        previewGrid.innerHTML = '';
+        selectedFiles.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const card = document.createElement('div');
+            card.className = 'relative aspect-square rounded-lg overflow-hidden border border-outline-variant/30 group shadow-sm max-w-[120px] mx-auto';
+            card.innerHTML = `
+              <img src="${e.target.result}" class="w-full h-full object-cover">
+              <button onclick="removeFile(${index}, event)" type="button" class="absolute top-1 right-1 bg-black/60 text-white rounded-full p-1 hover:bg-error transition-colors">
+                <span class="material-symbols-outlined text-xs block">close</span>
+              </button>
+            `;
+            previewGrid.appendChild(card);
+          };
+          reader.readAsDataURL(file);
+        });
+      } else {
+        emptyState.classList.remove('hidden');
+        previewGrid.classList.add('hidden');
+        clearRefsBtn.classList.add('hidden');
+      }
+    }
+
+    function removeFile(index, event) {
+      if (event) event.stopPropagation();
+      selectedFiles.splice(index, 1);
+      updateRefUI();
+    }
+
+    clearRefsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectedFiles = [];
+      updateRefUI();
+    });
+
+    // Prompt Field Logic (Max 150 Characters)
+    const promptInput = document.getElementById('promptInput');
+    const charCount = document.getElementById('charCount');
+    const clearPromptBtn = document.getElementById('clearPromptBtn');
+
+    promptInput.addEventListener('input', () => {
+      if (promptInput.value.length > 150) {
+        promptInput.value = promptInput.value.slice(0, 150);
+      }
+      charCount.innerText = `${promptInput.value.length} / 150 characters`;
+    });
+
+    clearPromptBtn.addEventListener('click', () => {
+      promptInput.value = '';
+      charCount.innerText = '0 / 150 characters';
+    });
+
+    // LocalStorage History Seed & Management
+    const STORAGE_KEY = 'artisanflow_history';
+
+    function getHistory() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) { console.error(e); }
+      }
+      // Initial default fallback history
+      const initial = [
+        {
+          id: Date.now() - 3000,
+          type: 'caption',
+          text: 'When the coffee kicks in right as your weekend begins ✨ #ArtisanFlow',
+          context: 'Friday studio mood',
+          image: 'assets/artisan_studio_workspace.png',
+          timestamp: 'Just now'
+        },
+        {
+          id: Date.now() - 2000,
+          type: 'meme',
+          text: 'Me spending 5 seconds writing code vs 3 hours choosing the font and color theme.',
+          context: 'Developer life',
+          image: 'assets/workspace_banner.png',
+          timestamp: '1 hour ago'
+        },
+        {
+          id: Date.now() - 1000,
+          type: 'caption',
+          text: 'Chasing pure creative inspiration in the digital studio. 🎨',
+          context: 'Digital art',
+          image: 'assets/artisan_studio_workspace.png',
+          timestamp: 'Yesterday'
+        }
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
+      return initial;
+    }
+
+    function saveHistoryItem(item) {
+      const history = getHistory();
+      history.unshift(item);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      renderHistoryGrid();
+    }
+
+    function renderHistoryGrid() {
+      const historyGrid = document.getElementById('recentHistoryGrid');
+      const historyCountText = document.getElementById('historyCountText');
+      if (!historyGrid) return;
+
+      const history = getHistory();
+      if (historyCountText) {
+        historyCountText.innerText = `${history.length} creation${history.length !== 1 ? 's' : ''}`;
+      }
+
+      if (history.length === 0) {
+        historyGrid.innerHTML = `
+          <div class="col-span-full py-8 text-center text-text-secondary">
+            <p class="text-xs">No history yet. Generate your first caption or meme above!</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Display up to 6 recent items
+      historyGrid.innerHTML = history.slice(0, 6).map(item => `
+        <div class="bg-white rounded-lg p-4 tactile-card border border-outline-variant/20 flex flex-col justify-between gap-3 space-y-2 hover:shadow-md transition-all relative">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 ${item.type === 'meme' ? 'bg-amber-100 text-amber-800' : 'bg-secondary-container text-on-secondary-container'} text-[10px] font-bold rounded-full uppercase tracking-wider">
+              ${item.type}
+            </span>
+            <span class="text-[11px] text-text-secondary">${item.timestamp || 'Recent'}</span>
+          </div>
+          <p class="text-xs text-on-surface font-medium leading-relaxed italic line-clamp-3">
+            "${escapeHtml(item.text)}"
+          </p>
+          <div class="pt-2 border-t border-outline-variant/20 flex items-center justify-between relative gap-1">
+            <div class="flex items-center gap-2">
+              <button onclick="copyTextToClipboard('${escapeHtml(item.text)}')" type="button" class="text-xs text-primary font-bold hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">content_copy</span> Copy Text
+              </button>
+              <button onclick="loadHistoryToOutput(${item.id})" type="button" class="text-xs text-text-secondary hover:text-on-surface flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">visibility</span> View
+              </button>
+            </div>
+
+            <!-- Delete Button & Inline Confirmation -->
+            <div class="relative">
+              <button onclick="toggleWsDeleteConfirm(${item.id})" type="button" title="Delete" class="p-1 text-text-secondary hover:text-error hover:bg-error-container/40 rounded transition-colors flex items-center">
+                <span class="material-symbols-outlined text-sm">delete</span>
+              </button>
+              <div id="ws-delete-confirm-${item.id}" class="hidden absolute right-0 bottom-full mb-1 bg-white border border-outline-variant/40 shadow-xl rounded-lg p-2 z-20 flex items-center gap-2 whitespace-nowrap">
+                <span class="text-[11px] font-bold text-error">Delete?</span>
+                <button onclick="deleteWsHistoryItem(${item.id})" type="button" class="px-2 py-0.5 bg-error text-white text-[10px] font-bold rounded hover:bg-red-700">Yes</button>
+                <button onclick="toggleWsDeleteConfirm(${item.id})" type="button" class="px-2 py-0.5 bg-surface-container-high text-on-surface text-[10px] font-bold rounded hover:bg-surface-variant">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleWsDeleteConfirm(id) {
+      document.querySelectorAll('[id^="ws-delete-confirm-"]').forEach(el => {
+        if (el.id !== `ws-delete-confirm-${id}`) el.classList.add('hidden');
+      });
+      const el = document.getElementById(`ws-delete-confirm-${id}`);
+      if (el) el.classList.toggle('hidden');
+    }
+
+    function deleteWsHistoryItem(id) {
+      let history = getHistory();
+      history = history.filter(item => item.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      renderHistoryGrid();
+      showToast('Item deleted from history');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+    }
+
+    function copyTextToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Text copied to clipboard!');
+      }).catch(err => {
+        showToast('Copied text');
+      });
+    }
+
+    function loadHistoryToOutput(id) {
+      const history = getHistory();
+      const item = history.find(h => h.id === id);
+      if (!item) return;
+
+      document.getElementById('outputText').innerText = item.text;
+      document.getElementById('outputTypeBadge').innerText = item.type.toUpperCase();
+
+      const outputContextTag = document.getElementById('outputContextTag');
+      const outputContextVal = document.getElementById('outputContextVal');
+      if (item.context) {
+        outputContextVal.innerText = item.context;
+        outputContextTag.classList.remove('hidden');
+      } else {
+        outputContextTag.classList.add('hidden');
+      }
+
+      showToast(`Loaded ${item.type} to output`);
+      document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Click to Copy Output Button Handler
+    const copyOutputBtn = document.getElementById('copyOutputBtn');
+    const copyBtnText = document.getElementById('copyBtnText');
+
+    copyOutputBtn.addEventListener('click', () => {
+      const text = document.getElementById('outputText').innerText.replace(/^"|"$/g, '').trim();
+      if (!text || text.includes('Upload an image')) {
+        showToast('No output to copy yet');
+        return;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtnText.innerText = 'Copied!';
+        showToast('Output text copied to clipboard!');
+        setTimeout(() => {
+          copyBtnText.innerText = 'Click to Copy';
+        }, 2000);
+      });
+    });
+
+    // Generate Button Action
+    const genBtn = document.getElementById('generate-btn');
+    const loader = document.getElementById('loading-overlay');
+    const errorBox = document.getElementById('errorBox');
+    const errorMsg = document.getElementById('errorMsg');
+
+    genBtn.addEventListener('click', async () => {
+      const promptText = promptInput.value.trim();
+
+      // Validation check
+      if (!selectedFiles || selectedFiles.length === 0) {
+        showToast('Validation Error: Please select an image.');
+        return;
+      }
+
+      errorBox.classList.add('hidden');
+      loader.classList.remove('opacity-0', 'pointer-events-none');
+      loader.classList.add('opacity-100');
+      genBtn.disabled = true;
+      genBtn.style.opacity = '0.7';
+
+      // Build Form Data for POST /api/caption
+      const formData = new FormData();
+      formData.append('image', selectedFiles[0]);
+      formData.append('mode', selectedMode);
+      if (promptText) {
+        formData.append('prompt', promptText);
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/caption`, {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.text) {
+          document.getElementById('outputText').innerText = data.text;
+          outputTypeBadge.innerText = selectedMode.toUpperCase();
+
+          const outputContextTag = document.getElementById('outputContextTag');
+          const outputContextVal = document.getElementById('outputContextVal');
+          if (promptText) {
+            outputContextVal.innerText = promptText;
+            outputContextTag.classList.remove('hidden');
+          } else {
+            outputContextTag.classList.add('hidden');
+          }
+
+          // Convert image file to data URL for local storage preview
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            saveHistoryItem({
+              id: Date.now(),
+              type: selectedMode,
+              text: data.text,
+              context: promptText || '',
+              image: e.target.result,
+              timestamp: 'Just now'
+            });
+          };
+          reader.readAsDataURL(selectedFiles[0]);
+
+          showToast(`${selectedMode === 'caption' ? 'Caption' : 'Meme'} generated successfully!`);
+        } else {
+          const err = data.error || `Server returned HTTP ${response.status}`;
+          errorMsg.innerText = err;
+          errorBox.classList.remove('hidden');
+          showToast(`Error: ${err}`);
+        }
+      } catch (err) {
+        console.error('Error generating caption/meme:', err);
+        errorMsg.innerText = `Unable to connect to backend at ${API_BASE_URL}. Ensure backend server is running.`;
+        errorBox.classList.remove('hidden');
+        showToast('Backend Error: Server not reachable.');
+      } finally {
+        loader.classList.remove('opacity-100');
+        loader.classList.add('opacity-0', 'pointer-events-none');
+        genBtn.disabled = false;
+        genBtn.style.opacity = '1';
+
+        document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // New Project Reset Handler
+    document.getElementById('newProjectBtn').addEventListener('click', () => {
+      promptInput.value = '';
+      charCount.innerText = '0 / 150 characters';
+      selectedFiles = [];
+      updateRefUI();
+      errorBox.classList.add('hidden');
+      showToast('New canvas ready');
+    });
+
+    // Toast Notification Helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      if (!toast || !toastMessage) return;
+      toastMessage.innerText = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 3000);
+    }
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHistoryGrid();
+    });
+  </script>
+</body>
+
+</html>
