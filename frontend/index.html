@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Profile Settings | ArtisanFlow</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#fffbff",
+            "on-secondary-fixed": "#0d1f18",
+            "surface-container-highest": "#f6ddd7",
+            "on-tertiary-fixed": "#001f27",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "outline-variant": "#e0bfb7",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed-variant": "#004e5e",
+            "text-secondary": "#7A7268",
+            "on-surface-variant": "#59413b",
+            "on-surface": "#251915",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "accent-amber": "#D97A2E",
+            "surface-container-low": "#fff1ed",
+            "secondary-fixed": "#d3e7db",
+            "inverse-on-surface": "#ffede9",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#ffb4a1",
+            "tertiary-fixed": "#b1ecff",
+            "surface-bright": "#fff8f6",
+            "on-primary-fixed": "#3c0800",
+            "on-secondary-container": "#54675d",
+            "surface-container-high": "#fbe3dd",
+            "border-muted": "#E5E1DA",
+            "on-tertiary-container": "#f9fdff",
+            "background": "#fff8f6",
+            "outline": "#8c716a",
+            "background-dark": "#1E1B18",
+            "background-base": "#FAF7F2",
+            "primary-fixed": "#ffdbd2",
+            "secondary-fixed-dim": "#b7cbc0",
+            "primary": "#a83212",
+            "on-primary-fixed-variant": "#891e00",
+            "primary-container": "#ca4a28",
+            "on-secondary-fixed-variant": "#384b42",
+            "surface-dim": "#edd5cf",
+            "surface-tint": "#ab3514",
+            "error-container": "#ffdad6",
+            "secondary": "#506359",
+            "on-background": "#251915",
+            "surface-variant": "#f6ddd7",
+            "surface": "#fff8f6",
+            "tertiary-fixed-dim": "#65d5f3",
+            "inverse-primary": "#ffb4a1",
+            "tertiary-container": "#008098",
+            "surface-container": "#ffe9e4",
+            "text-primary": "#2A2622",
+            "secondary-container": "#d0e5d8",
+            "tertiary": "#006579",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#3c2d29"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "section-padding": "64px",
+            "margin-desktop": "48px",
+            "margin-mobile": "20px",
+            "gutter": "24px",
+            "stack-gap": "32px"
+          },
+          "fontFamily": {
+            "title-md": ["Be Vietnam Pro", "sans-serif"],
+            "headline-lg": ["Be Vietnam Pro", "sans-serif"],
+            "display-lg": ["Be Vietnam Pro", "sans-serif"],
+            "label-md": ["Hanken Grotesk", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .paper-shadow {
+      box-shadow: 0 10px 40px -10px rgba(168, 50, 18, 0.08);
+    }
+    body {
+      background-color: #fff8f6;
+      color: #251915;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md">
+  <!-- TopNavBar -->
+  <nav class="fixed top-0 w-full z-50 bg-surface shadow-sm flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop">
+    <div class="flex items-center gap-8">
+      <span class="font-display-lg text-display-lg font-bold text-primary text-xl">ArtisanFlow</span>
+      <div class="hidden md:flex gap-6">
+        <a class="text-on-surface-variant hover:text-primary font-medium font-title-md text-sm transition-colors py-1" href="workspace.html">Workspace</a>
+        <a class="text-on-surface-variant hover:text-primary font-medium font-title-md text-sm transition-colors py-1" href="library.html">Library</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <a class="text-on-surface-variant hover:text-primary font-title-md text-sm font-semibold transition-colors flex items-center gap-1" href="signin.html">
+        <span class="material-symbols-outlined text-lg">login</span>
+        <span>Sign In</span>
+      </a>
+      <a class="bg-primary hover:bg-primary-container text-white px-4 py-1.5 rounded-full font-title-md text-sm font-semibold transition-all shadow-sm active:scale-95 flex items-center gap-1" href="signup.html">
+        <span class="material-symbols-outlined text-sm">person_add</span>
+        <span>Sign Up</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="pt-24 pb-20 px-margin-mobile md:px-margin-desktop min-h-screen">
+    <div class="max-w-3xl mx-auto space-y-stack-gap">
+      <!-- Header -->
+      <header class="space-y-2">
+        <h1 class="font-display-lg text-3xl font-bold text-on-surface">Profile Settings</h1>
+        <p class="text-text-secondary font-body-lg text-base">Manage your digital artisan workspace and security preferences.</p>
+      </header>
+
+      <!-- Profile Canvas -->
+      <div class="bg-surface-container-lowest p-8 md:p-12 rounded-xl paper-shadow border border-outline-variant/30 space-y-10">
+        <!-- Account Identity -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="md:col-span-1">
+            <h3 class="font-title-md text-title-md text-on-surface font-semibold">Account Identity</h3>
+            <p class="text-on-surface-variant font-label-md text-label-md mt-1">Your registered creative credentials.</p>
+          </div>
+          <div class="md:col-span-2 space-y-6">
+            <div class="space-y-2">
+              <label class="font-label-md text-label-md text-on-surface-variant block">Email Address</label>
+              <div class="relative group">
+                <input class="w-full bg-surface-container-low border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-all cursor-not-allowed" readonly="" type="email" value="artisan@studio.com">
+                <span class="absolute right-3 top-3.5 material-symbols-outlined text-outline text-sm select-none">lock</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="border-outline-variant/20">
+
+        <!-- Security Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="md:col-span-1">
+            <h3 class="font-title-md text-title-md text-on-surface font-semibold">Security</h3>
+            <p class="text-on-surface-variant font-label-md text-label-md mt-1">Protect your creative assets with a strong password.</p>
+          </div>
+          <div class="md:col-span-2 space-y-6">
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant block">Current Password</label>
+                <input class="w-full bg-surface-bright border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="••••••••" type="password">
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant block">New Password</label>
+                <input class="w-full bg-surface-bright border border-outline-variant text-on-surface rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Min. 8 characters" type="password">
+              </div>
+              <div class="pt-2">
+                <button class="bg-primary hover:bg-primary-container text-white px-6 py-2.5 rounded-full font-label-md text-label-md transition-all active:scale-95 shadow-md">
+                  Update Password
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="border-outline-variant/20">
+
+        <!-- Sessions & Logout -->
+        <section class="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
+          <div class="text-center md:text-left">
+            <h3 class="font-title-md text-title-md text-on-surface font-semibold">End Session</h3>
+            <p class="text-on-surface-variant font-label-md text-label-md">Safely sign out from ArtisanFlow.</p>
+          </div>
+          <button class="border-2 border-primary text-primary hover:bg-primary-container hover:text-white px-10 py-3 rounded-full font-title-md text-title-md font-bold transition-all active:scale-95 flex items-center justify-center" id="logoutBtn">
+            Logout
+          </button>
+        </section>
+      </div>
+
+      <!-- Visual Flare - Artistic Element -->
+      <div class="relative h-64 w-full rounded-xl overflow-hidden group shadow-sm border border-outline-variant/20">
+        <img class="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700" 
+             src="assets/workspace_banner.png" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80';"
+             alt="Artisan Workspace Desk with Tablet">
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+        <div class="absolute bottom-6 left-8">
+          <span class="bg-surface-container-highest px-4 py-1.5 rounded-full text-primary font-bold font-label-md text-label-md shadow-lg border border-outline-variant/30">Your Workspace</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Nav Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container flex justify-around items-center h-16 z-50 border-t border-outline-variant/20">
+    <a href="workspace.html" class="flex flex-col items-center gap-1 text-on-surface-variant">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+      <span class="text-[10px] font-bold">Studio</span>
+    </a>
+    <a href="library.html" class="flex flex-col items-center gap-1 text-on-surface-variant">
+      <span class="material-symbols-outlined">auto_awesome_motion</span>
+      <span class="text-[10px] font-bold">Library</span>
+    </a>
+  </nav>
+
+  <script>
+    // Micro-interactions & Navigation
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      this.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">refresh</span> Logging out...';
+      this.classList.add('opacity-80', 'cursor-wait');
+      setTimeout(() => {
+        window.location.href = 'signin.html';
+      }, 1000);
+    });
+
+    // Hover effect for the identity input
+    const readOnlyInput = document.querySelector('input[readonly]');
+    if (readOnlyInput) {
+      readOnlyInput.addEventListener('mouseenter', () => {
+        const lockIcon = readOnlyInput.parentElement.querySelector('span');
+        if (lockIcon) lockIcon.classList.add('text-primary');
+      });
+      readOnlyInput.addEventListener('mouseleave', () => {
+        const lockIcon = readOnlyInput.parentElement.querySelector('span');
+        if (lockIcon) lockIcon.classList.remove('text-primary');
+      });
+    }
+  </script>
+</body>
+</html>

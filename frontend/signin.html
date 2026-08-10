@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>ArtisanFlow | Sign In</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#ab3514",
+            "surface-container": "#ffe9e4",
+            "background-dark": "#1E1B18",
+            "outline-variant": "#e0bfb7",
+            "background": "#fff8f6",
+            "on-primary-fixed": "#3c0800",
+            "primary": "#a83212",
+            "secondary-container": "#d0e5d8",
+            "border-muted": "#E5E1DA",
+            "surface-bright": "#fff8f6",
+            "surface-dim": "#edd5cf",
+            "primary-container": "#ca4a28",
+            "on-background": "#251915",
+            "tertiary-fixed": "#b1ecff",
+            "tertiary-container": "#008098",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "primary-fixed-dim": "#ffb4a1",
+            "on-surface": "#251915",
+            "background-base": "#FAF7F2",
+            "primary-fixed": "#ffdbd2",
+            "on-secondary-fixed": "#0d1f18",
+            "tertiary": "#006579",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#59413b",
+            "text-secondary": "#7A7268",
+            "on-tertiary": "#ffffff",
+            "accent-amber": "#D97A2E",
+            "on-tertiary-fixed": "#001f27",
+            "secondary-fixed-dim": "#b7cbc0",
+            "on-primary": "#ffffff",
+            "surface-container-high": "#fbe3dd",
+            "outline": "#8c716a",
+            "error-container": "#ffdad6",
+            "text-primary": "#2A2622",
+            "inverse-surface": "#3c2d29",
+            "surface-container-low": "#fff1ed",
+            "on-primary-container": "#fffbff",
+            "inverse-on-surface": "#ffede9",
+            "secondary": "#506359",
+            "on-secondary-container": "#54675d",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed-variant": "#384b42",
+            "on-tertiary-fixed-variant": "#004e5e",
+            "inverse-primary": "#ffb4a1",
+            "on-tertiary-container": "#f9fdff",
+            "surface-variant": "#f6ddd7",
+            "secondary-fixed": "#d3e7db",
+            "surface": "#fff8f6",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#f6ddd7",
+            "tertiary-fixed-dim": "#65d5f3",
+            "on-primary-fixed-variant": "#891e00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "20px",
+            "margin-desktop": "48px",
+            "gutter": "24px",
+            "stack-gap": "32px",
+            "section-padding": "64px"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Be Vietnam Pro", "sans-serif"],
+            "title-md": ["Be Vietnam Pro", "sans-serif"],
+            "headline-lg": ["Be Vietnam Pro", "sans-serif"],
+            "display-lg": ["Be Vietnam Pro", "sans-serif"],
+            "caption-sm": ["Hanken Grotesk", "sans-serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"],
+            "label-md": ["Hanken Grotesk", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+            "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF7F2;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .input-focus-ring:focus {
+      box-shadow: 0 0 0 2px #ffdbd2;
+      border-color: #a83212;
+      outline: none;
+    }
+    .artistic-blur {
+      filter: blur(80px);
+      opacity: 0.15;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-margin-mobile md:p-0 overflow-hidden font-body-md text-on-surface" data-mode="connect">
+  <!-- Subtle Artistic Background Elements -->
+  <div class="fixed inset-0 pointer-events-none -z-10">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-fixed rounded-full artistic-blur"></div>
+    <div class="absolute top-1/2 -right-48 w-[32rem] h-[32rem] bg-secondary-fixed rounded-full artistic-blur"></div>
+    <div class="absolute -bottom-12 left-1/4 w-80 h-80 bg-tertiary-fixed rounded-full artistic-blur"></div>
+  </div>
+
+  <!-- Main Layout Container -->
+  <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 bg-surface-container-lowest rounded-xl shadow-lg overflow-hidden border border-outline-variant/10 relative">
+    
+    <!-- Branding & Illustration Side (Left Desktop) -->
+    <div class="hidden md:flex flex-col justify-between p-16 bg-surface-container-low border-r border-outline-variant/20">
+      <div class="space-y-8">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">palette</span>
+          <span class="font-display-lg text-headline-lg text-primary tracking-tight">ArtisanFlow</span>
+        </a>
+        <div class="space-y-4">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">Where craft meets <span class="text-primary italic">precision.</span></h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm">Upload your reference work and let AI generate captions or memes ready for social media.</p>
+        </div>
+      </div>
+      <div class="relative group mt-12">
+        <div class="aspect-square w-full rounded-xl overflow-hidden shadow-md">
+          <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+               alt="A high-end studio photography shot of a minimalist creative workspace with a digital tablet, ceramic brushes, and soft sunlight." 
+               src="assets/artisan_studio_workspace.png"
+               onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDiE3w-o4T8FiA87YVBC3TmrRTiKu6LEb35Q5M5Ve3C_J60PRNy7sHg4p6tCDburPrLcIbrA767KKU-2vVVSrboAk2_rdiFxvoYH-sEqxb46ZhcCWaFeuPZ3lWbsm4sZGBEX5aqSjk_lRHS6-KTtfyDKEZ08CZL7EGVP3hA1Q8hzet9z5cA6MAZeHh5Ld0-ZcGuWBOYBciggzPfQsYH9lwEDDP6njvuLl188xMRQ2ZZHx5TRtfLt9bxOypYB3bSh4GBUJxMySnhFqF3';">
+        </div>
+        <!-- Artistic Badge -->
+        <div class="absolute -bottom-6 -right-6 bg-primary p-6 rounded-xl shadow-xl text-on-primary">
+          <span class="material-symbols-outlined text-4xl">auto_awesome</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Form Side (Right) -->
+    <div class="p-8 md:p-16 flex flex-col justify-center">
+      <!-- Mobile Logo -->
+      <div class="md:hidden flex items-center gap-2 mb-12">
+        <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">palette</span>
+        <span class="font-display-lg text-headline-lg-mobile text-primary tracking-tight">ArtisanFlow</span>
+      </div>
+      
+      <div class="mb-10 text-left">
+        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Continue your creative journey</h1>
+        <p class="font-body-md text-body-md text-on-surface-variant">Welcome back to your digital studio.</p>
+      </div>
+
+      <form id="signinForm" action="#" class="space-y-6" onsubmit="return false;">
+        <div class="space-y-1.5">
+          <label class="font-label-md text-label-md text-on-surface-variant px-1" for="email">Email Address</label>
+          <div class="relative group">
+            <input class="w-full h-12 px-4 bg-background border border-outline-variant rounded-lg transition-all input-focus-ring font-body-md placeholder:text-outline/50" id="email" placeholder="name@studio.com" type="email">
+            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">alternate_email</span>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center px-1">
+            <label class="font-label-md text-label-md text-on-surface-variant" for="password">Password</label>
+            <a id="forgotPassword" class="text-caption-sm font-label-md text-primary hover:underline transition-all" href="#">Forgot password?</a>
+          </div>
+          <div class="relative group">
+            <input class="w-full h-12 px-4 bg-background border border-outline-variant rounded-lg transition-all input-focus-ring font-body-md placeholder:text-outline/50" id="password" placeholder="••••••••" type="password">
+            <span id="visibilityToggle" class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary cursor-pointer select-none" style="font-variation-settings: 'FILL' 0;">visibility</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 py-2">
+          <input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 bg-background cursor-pointer" id="remember" type="checkbox" checked>
+          <label class="font-body-md text-body-md text-on-surface-variant cursor-pointer select-none" for="remember">Keep me signed in</label>
+        </div>
+
+        <button id="submitBtn" class="w-full h-14 bg-primary text-on-primary font-title-md text-title-md rounded-lg shadow-md hover:bg-primary-container active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 group" type="submit">
+          <span>Login</span>
+          <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+        </button>
+      </form>
+
+      <div class="mt-12 pt-8 border-t border-outline-variant/10">
+        <p class="text-center font-body-md text-body-md text-on-surface-variant">
+          Don't have an account? 
+          <a id="signUpLink" class="text-primary font-bold hover:underline ml-1" href="signup.html">Sign up for free</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Decoration -->
+  <div class="fixed bottom-8 w-full flex justify-center pointer-events-none opacity-40">
+    <p class="font-caption-sm text-caption-sm text-on-surface-variant tracking-widest uppercase">ArtisanFlow © 2026 • Crafted with Intention</p>
+  </div>
+
+  <script>
+    // Micro-interactions for input fields
+    const inputs = document.querySelectorAll('input[type="email"], input[type="password"]');
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        const icon = input.parentElement.querySelector('.material-symbols-outlined');
+        if (icon) icon.style.fontVariationSettings = "'FILL' 1";
+      });
+      input.addEventListener('blur', () => {
+        const icon = input.parentElement.querySelector('.material-symbols-outlined');
+        if (icon) icon.style.fontVariationSettings = "'FILL' 0";
+      });
+    });
+
+    // Toggle password visibility
+    const visibilityToggle = document.getElementById('visibilityToggle');
+    const passwordInput = document.getElementById('password');
+    let visible = false;
+
+    visibilityToggle.addEventListener('click', () => {
+      visible = !visible;
+      passwordInput.type = visible ? 'text' : 'password';
+      visibilityToggle.textContent = visible ? 'visibility_off' : 'visibility';
+    });
+
+    // Handle Form Submission and Redirection
+    const form = document.getElementById('signinForm');
+    const btn = document.getElementById('submitBtn');
+    
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> <span class="ml-2">Signing in...</span>';
+      btn.classList.add('opacity-80', 'cursor-not-allowed');
+      
+      setTimeout(() => {
+        window.location.href = 'workspace.html';
+      }, 1000);
+    });
+
+    // Forgot Password trigger
+    document.getElementById('forgotPassword').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('A password reset link has been sent to your email.');
+    });
+  </script>
+</body>
+</html>
